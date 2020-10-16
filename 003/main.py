@@ -25,3 +25,15 @@ Pelda kimenet:
 [0, 35, 1]
 
 """
+n = int(input("Adj meg egy számot"))
+print(n)
+ndaraboslista = []
+
+while len(ndaraboslista) != n:
+    számok = int(input("Adj meg számokat a tömbbe"))
+    if számok > 0:
+        ndaraboslista.append(számok)
+    else:
+        számok = int(input("Adj meg egy másikat"))
+
+print(ndaraboslista)
