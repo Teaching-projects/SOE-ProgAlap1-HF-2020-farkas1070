@@ -26,7 +26,6 @@ Pelda kimenet:
 
 """
 n = int(input())
-print(n)
 ndaraboslista = []
 
 while len(ndaraboslista) != n:
