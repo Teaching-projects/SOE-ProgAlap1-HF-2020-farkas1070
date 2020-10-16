@@ -30,7 +30,7 @@ ndaraboslista = []
 
 while len(ndaraboslista) != n:
     számok = int(input())
-    if számok > 0:
+    if számok >= 0:
         ndaraboslista.append(számok)
     else:
         számok = int(input())
