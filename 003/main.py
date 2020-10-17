@@ -34,7 +34,5 @@ while hely < n:
     if szám >= 0:
         ndaraboslista.append(szám)
         hely += 1
-    else:
-        szám = int(input())
 
 print(ndaraboslista)
