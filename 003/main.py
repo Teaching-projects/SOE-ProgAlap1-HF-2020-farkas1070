@@ -27,12 +27,11 @@ Pelda kimenet:
 """
 n = int(input())
 ndaraboslista = []
-hely = 0
 
-while hely < n:
+
+while len(ndaraboslista) != n:
     szám = int(input())
     if szám >= 0:
         ndaraboslista.append(szám)
-        hely += 1
 
 print(ndaraboslista)
