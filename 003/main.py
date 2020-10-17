@@ -27,12 +27,14 @@ Pelda kimenet:
 """
 n = int(input())
 ndaraboslista = []
+hely = 0
 
-while len(ndaraboslista) != n:
-    számok = int(input())
-    if számok >= 0:
-        ndaraboslista.append(számok)
+while hely < n:
+    szám = int(input())
+    if szám >= 0:
+        ndaraboslista.append(szám)
+        hely += 1
     else:
-        számok = int(input())
+        szám = int(input())
 
 print(ndaraboslista)
