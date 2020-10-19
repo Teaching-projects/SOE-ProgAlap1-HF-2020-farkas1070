@@ -20,6 +20,7 @@ jobs:
   input-output-test:
     needs: check-existing-exercises
     strategy:
+      fail-fast: false
       matrix: ${{fromJson(needs.check-existing-exercises.outputs.matrix)}}
     name: Test
     runs-on: ubuntu-latest
