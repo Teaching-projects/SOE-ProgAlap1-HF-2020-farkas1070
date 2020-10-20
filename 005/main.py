@@ -18,4 +18,14 @@ Pl.:
 48  (66)  -->  12
 49 (100)  -->  1
 """
+szám =int(input())
+maradékok = []
+összeg = 0
+while szám > 0:
+    maradékok.append(szám % 7)
+    szám //= 7
 
+for i in range(len(maradékok)):
+    összeg = összeg + maradékok[i]
+
+print(összeg)
