@@ -35,6 +35,9 @@ while szám != 0:
         szám = int(input())
     else:
         szám = int(input())
-print(számok)
 
 
+index = 0
+while index < len(számok):
+    print(számok[index])
+    index = index + 1
