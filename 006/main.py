@@ -23,6 +23,18 @@ Kimenet:
 3
 4
 7
-5
-6
 """
+szám = int(input())
+számok = []
+if szám == 0:
+    print(szám)
+
+while szám != 0:
+    if szám not in számok:
+        számok.append(szám)
+        szám = int(input())
+    else:
+        szám = int(input())
+print(számok)
+
+
