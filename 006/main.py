@@ -28,9 +28,7 @@ Kimenet:
 szám = int(input())
 számok = []
 index = 0
-if szám == 0:
-    print()
-    
+
 while szám != 0:
     if szám not in számok:
         számok.append(szám)
