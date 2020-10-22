@@ -27,9 +27,10 @@ Kimenet:
 
 szám = int(input())
 számok = []
+index = 0
 if szám == 0:
-    print(szám)
-
+    print()
+    
 while szám != 0:
     if szám not in számok:
         számok.append(szám)
@@ -38,7 +39,6 @@ while szám != 0:
         szám = int(input())
 
 
-index = 0
 while index < len(számok):
     print(számok[index])
     index = index + 1
