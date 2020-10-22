@@ -24,6 +24,7 @@ Kimenet:
 4
 7
 """
+
 szám = int(input())
 számok = []
 if szám == 0:
