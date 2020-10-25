@@ -1,12 +1,12 @@
 x=0.0
 y=0.0
-
-
-origo_távolság = 0
-x = 0
-y = 0
+origo_távolság = 0.0
 
 parancs = input()
+if parancs == "stop":
+    print(round(x, 2))
+    print(round(y, 2))
+    print(round(origo_távolság, 2))
 
 while parancs != "stop":
     if parancs == "forward":
@@ -28,11 +28,15 @@ while parancs != "stop":
     if parancs == "stop":
         print(round(x, 2))
         print(round(y, 2))
+        origo_távolság = ((x **2) + (y**2)) ** (1/2)
+        print(round(origo_távolság, 2))
+        
 
 
 
-origo_távolság = ((x **2) + (y**2)) ** (1/2)
-print(round(origo_távolság, 2))
+
+
+
 
 
 
