@@ -15,5 +15,6 @@ while hónap != 12:
         egyenleg += int(egyenleg * 0.1)
     hónap += 1
 
+
 print(egyenleg)
 print(nincs_kamat)
