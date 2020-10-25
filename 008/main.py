@@ -30,6 +30,7 @@ while parancs != "stop":
         print(round(y, 2))
 
 
+
 origo_távolság = ((x **2) + (y**2)) ** (1/2)
 print(round(origo_távolság, 2))
 
