@@ -5,8 +5,8 @@ nincs_kamat = 0
 
 while hónap != 12:
     pénzmozgás = int(int(input()))
-    pénzmozgás += egyenleg
-    pénzmozgás += nincs_kamat
+    egyenleg += pénzmozgás
+    nincs_kamat += pénzmozgás
     if hónap != 0:
         egyenleg -= 2000
     if egyenleg > 0:
@@ -16,5 +16,5 @@ while hónap != 12:
     hónap += 1
 
 
-print(egyenleg)
+print(int(egyenleg))
 print(nincs_kamat)
