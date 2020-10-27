@@ -12,8 +12,8 @@ for hónap in range(12):
     smsek.append(smsekelemek)
 
 havidíj = int(input())
-smsdíj = int(input())
 percdíj = int(input())
+smsdíj = int(input())
 költség = 0
 szamla=[]
 
