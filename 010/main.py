@@ -21,11 +21,11 @@ for hónap in range(12):
     nagyobb = (percek[hónap] * percdíj) + (smsek[hónap] * smsdíj)
     if nagyobb > havidíj:
         költség = nagyobb
-        szamla.append(nagyobb)
+        szamla.append(költség)
         
     else:
         költség = havidíj
-        szamla.append(havidíj)
+        szamla.append(költség)
 
 for i in range(len(szamla)):
     total = szamla[i] + total
