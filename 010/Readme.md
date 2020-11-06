@@ -8,7 +8,7 @@ Ebben a leegyszerűsített esetben egy csomagot három egész szám ír le:
 
 Szintén az egyszerűsítés végett feltételezhető, hogy minden hónapban valahány egész percet telefonálunk. Azt is tudjuk, hogy a teljes havidíj telefonálásra, SMS-ezésre felhasználható, viszont nyilván akkor is ki kell fizetnünk, ha be sem kapcsoltuk a telefonunkat.
 
-Tehát például ha a havidíj 1000 Ft, a percdíj 50 Ft, az SMS díj 100 Ft, akkor 5 perc és 10 SMS után is 1000 forintot kell fizetni. Viszont ha beszélünk 8 órát, de nem küldünk SMS-t, akkor az 2400 Ft.
+Tehát például ha a havidíj 1000 Ft, a percdíj 50 Ft, az SMS díj 100 Ft, akkor 5 perc és 1 SMS után is 1000 forintot kell fizetni. Viszont ha beszélünk 8 órát, de nem küldünk SMS-t, akkor az 2400 Ft.
 
 A program először kérjen be 24 egész számot, melyek tartalmazzák, hogy:
 1. Januárban hány percet telefonáltunk
