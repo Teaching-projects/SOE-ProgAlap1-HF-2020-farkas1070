@@ -39,10 +39,35 @@ tehat pl egy initialize_map(10,6) altal adott terkepet ha kiiratunk, az igy nezz
 """
 
 def initialize_map (width, height):
-    # ide masold be a helyes megoldasodat mult hetrol
+    térkép = []
+
+    
+    tégla = "█"
+    nincs_tégla = "░"
+    for i in range(1):
+        egység = ["█"]*width
+        térkép.append(egység)
+    for i in range(height-2):
+        egység = []
+        egység.append(tégla)
+        for i in range(width-2):
+            egység.append(nincs_tégla)
+        egység.append(tégla)
+        térkép.append(egység)
+    for i in range(1):
+        egység = ["█"]*width
+        térkép.append(egység)
+            
+
+    return térkép
 
 def pretty_map_print(map):
-    # Ide ird meg az uj fuggvenyt, ami a fentiek szerint generalja a kimenetet
+    index = 0
+    map = initialize_map(width,height)
+    for i in map:
+        for j in i:
+            print(j, end='')
+        print('\n')
 
 
 ###############################################################
