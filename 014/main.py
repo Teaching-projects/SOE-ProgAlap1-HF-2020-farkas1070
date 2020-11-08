@@ -53,4 +53,6 @@ while True:
     pretty_map_print(map,character)
     command = input()
     if command=="end": break
-    move(map,character,command)
+    print ("Moving "+command+" is "+ 
+        ("successful" if move(map,character,command) else "impossibru")
+    )
