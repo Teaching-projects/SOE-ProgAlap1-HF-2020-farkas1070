@@ -66,8 +66,8 @@ def pretty_map_print(map, character):
     }
     for i in range(len(map)):
         for j in range(len(map[i])):
-            index1 = character["position"]["x"]
-            index2 = character["position"]["y"]
+            index1 = character["position"]["y"]
+            index2 = character["position"]["x"]
             if i == index1 and j == index2:
                 map[i][j] = "🧙"
                 print(map[i][j],end='')
