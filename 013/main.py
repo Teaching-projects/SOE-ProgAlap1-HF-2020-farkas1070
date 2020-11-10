@@ -58,10 +58,10 @@ def initialize_map (width, height):
 def pretty_map_print(map, character):
     x = character["position"]["x"]
     y = character["position"]["y"]
-    width = len(map[1])
-    height = len(map)
+    sorok = len(map[1])
+    oszlopok = len(map)
 
-    if (x <= width - 1 and x >= 0) and (y <= height - 1 and y >= 0): 
+    if (x <= sorok - 1 and x >= 0) and (y <= oszlopok - 1 and y >= 0): 
         map[y][x] = "🧙"
 
     for i in range(len(map)):
