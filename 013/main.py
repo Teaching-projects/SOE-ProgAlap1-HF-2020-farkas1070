@@ -33,11 +33,52 @@ Ket dolog valtozott meg:
 """
 
 def initialize_map (width, height):
-    # ide masold be a helyes megoldasodat a multkorirol
+    térkép = []
+
+        
+    tégla = "██"
+    nincs_tégla = "░░"
+    for i in range(1):
+        egység = ["██"]*width
+        térkép.append(egység)
+    for i in range(height-2):
+        egység = []
+        egység.append(tégla)
+        for i in range(width-2):
+            egység.append(nincs_tégla)
+        egység.append(tégla)
+        térkép.append(egység)
+    for i in range(1):
+        egység = ["██"]*width
+        térkép.append(egység)
+    return térkép
+
+
 
 def pretty_map_print(map, character):
-    # Ide masold be a multkorit, a fenti modositasokkal. 
-    # Ha a karakter pozicioja a palyan kivul lenne, egyszeruen ne jelenjen meg
+    map = initialize_map(width,height)
+    character = {
+    "name" : "Dark Wanderer",
+    "position" : {
+        "x" : 4 ,
+        "y" : 2 
+        }
+    }
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            index1 = character["position"]["x"]
+            index2 = character["position"]["y"]
+            if i == index1 and j == index2:
+                map[i][j] = "🧙"
+                print(map[i][j],end='')
+            #if map[i][j] == map[character["position"]["x"]][character["position"]["y"]]:
+             #  map[i][j] == "[]"
+              # print(map[i][j],end='')
+            else:
+                print(map[i][j], end='')
+        print()
+
+
 
 
 ###############################################################

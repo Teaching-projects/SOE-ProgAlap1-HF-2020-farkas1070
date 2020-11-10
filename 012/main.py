@@ -62,6 +62,7 @@ def initialize_map (width, height):
     return térkép
 
 def pretty_map_print(map):
+    map = initialize_map(width,height)
     for i in range(len(map)):
         for j in range(len(map[i])): print(map[i][j], end="")
         print()
