@@ -56,26 +56,17 @@ def initialize_map (width, height):
 
 
 def pretty_map_print(map, character):
-    map = initialize_map(width,height)
-    character = {
-    "name" : "Dark Wanderer",
-    "position" : {
-        "x" : 4 ,
-        "y" : 2 
-        }
-    }
+    x = character["position"]["x"]
+    y = character["position"]["y"]
+    width = len(map[1])
+    height = len(map)
+
+    if (x <= width - 1 and x >= 0) and (y <= height - 1 and y >= 0): 
+        map[y][x] = "🧙"
+
     for i in range(len(map)):
         for j in range(len(map[i])):
-            index1 = character["position"]["y"]
-            index2 = character["position"]["x"]
-            if i == index1 and j == index2:
-                map[i][j] = "🧙"
-                print(map[i][j],end='')
-            #if map[i][j] == map[character["position"]["x"]][character["position"]["y"]]:
-             #  map[i][j] == "[]"
-              # print(map[i][j],end='')
-            else:
-                print(map[i][j], end='')
+            print(map[i][j], end='')
         print()
 
 
