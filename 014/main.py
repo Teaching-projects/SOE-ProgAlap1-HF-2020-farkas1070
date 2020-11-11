@@ -40,19 +40,22 @@ def pretty_map_print(map, character):
 def move(map,character,direction):
     x = character["position"]["x"]
     y = character["position"]["y"]
-    map[character["position"]["y"]][character["position"]["x"]] = "░"
 
-    if direction == "up" and map[y-1][x] != "██":
+    if direction == "up" and map[y-1][x] != "█":
         character["position"]["y"] -= 1
+        map[y][x] = "░"
         return True
-    if direction == "down" and map[y+1][x] != "██":
+    if direction == "down" and map[y+1][x] != "█":
         character["position"]["y"] += 1
+        map[y][x] = "░"
         return True
-    if direction == "left"and map[y][x-1] != "██":
+    if direction == "left"and map[y][x-1] != "█":
         character["position"]["x"] -= 1
+        map[y][x] = "░"
         return True
-    if direction == "right" and map[y][x+1] != "██":
+    if direction == "right" and map[y][x+1] != "█":
         character["position"]["x"] += 1
+        map[y][x] = "░"
         return True
     else:
         return False
