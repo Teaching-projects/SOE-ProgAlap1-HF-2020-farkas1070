@@ -33,28 +33,29 @@ def pretty_map_print(map, character):
     for i in range(len(map)):
         for j in range(len(map[i])):
             print(map[i][j], end='')
-        print()
-
+            if map[i][j] != "🧙":
+                print(map[i][j], end='')
+        print('')
 
 def move(map,character,direction):
     x = character["position"]["x"]
     y = character["position"]["y"]
-    if direction == "up" and map[y-1][x] != "█":
+    map[character["position"]["y"]][character["position"]["x"]] = "░"
+
+    if direction == "up" and map[y-1][x] != "██":
         character["position"]["y"] -= 1
-        map[y][x] = "░"
         return True
-    if direction == "down" and map[y+1][x] != "█":
+    if direction == "down" and map[y+1][x] != "██":
         character["position"]["y"] += 1
-        map[y][x] = "░"
         return True
-    if direction == "left"and map[y][x-1] != "█":
+    if direction == "left"and map[y][x-1] != "██":
         character["position"]["x"] -= 1
-        map[y][x] = "░"
         return True
-    if direction == "right" and map[y][x+1] != "█":
+    if direction == "right" and map[y][x+1] != "██":
         character["position"]["x"] += 1
-        map[y][x] = "░"
         return True
+    else:
+        return False
 
 
 
