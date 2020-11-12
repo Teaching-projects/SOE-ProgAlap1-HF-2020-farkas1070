@@ -38,10 +38,71 @@ Terkepnek a korabbit hasznalja, es ugyanugy a bal felso ficakbol indulunk.
 """
 
 def pretty_map_print(map, character):
-    # A multkorit kell kicsit megpofozni
+    x = character["position"]["x"]
+    y = character["position"]["y"]
+    sorok = len(map[1])
+    oszlopok = len(map)
+
+    if (x <= sorok - 1 and x >= 0) and (y <= oszlopok - 1 and y >= 0): 
+        map[y][x] = "🧙"
+
+    látás = character["vision"]
+    #for i in range(map[(y-látás):(y+látás)]):
+       # for j in range(map[(x-látás):(x+látás)]):
+         #   print(map[i][j])
+          #  if map[i][j] != "🧙":
+             #   print(map[i][j])
+     #   print('')
+    if y <= látás and x <= látás:
+        for i in range(len(map[0:y+látás+1])):
+            for j in range(len(map[0:x+látás+1])):
+                print(map[i][j],end='')
+                if map[i][j] != "🧙":
+                    print(map[i][j],end='')
+            print('')
+    if y > látás and x > látás:
+        for i in range(map[y-látás:y+látás]):
+            for j in range(map[x-látás:x+látás]):
+                print(map[i][j],end='')
+                if map[i][j] != "🧙":
+                    print(map[i][j],end='')
+        print('')
+    if y > látás and x <= látás:
+        for i in range(map[y-látás:y+látás]):
+            for j in range(map[0:x+látás+1]):
+                print(map[i][j],end='')
+                if map[i][j] != "🧙":
+                    print(map[i][j],end='')
+        print('')
+    if y <= látás and x > látás:
+        for i in range(map[0:y+látás+1]):
+            for j in range(map[x-látás:x+látás]):
+                print(map[i][j],end='')
+                if map[i][j] != "🧙":
+                    print(map[i][j],end='')
+        print('')
 
 def move(map,character,direction):
-    # ide csak masold be a multkorit, nem kell pofozni
+    x = character["position"]["x"]
+    y = character["position"]["y"]
+    if direction == "up" and map[y-1][x] != "█":
+        character["position"]["y"] -= 1
+        map[y][x] = "░"
+        return True
+    if direction == "down" and map[y+1][x] != "█":
+        character["position"]["y"] += 1
+        map[y][x] = "░"
+        return True
+    if direction == "left"and map[y][x-1] != "█":
+        character["position"]["x"] -= 1
+        map[y][x] = "░"
+        return True
+    if direction == "right" and map[y][x+1] != "█":
+        character["position"]["x"] += 1
+        map[y][x] = "░"
+        return True
+    else:
+        return False
 
 
 
