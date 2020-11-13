@@ -47,40 +47,17 @@ def pretty_map_print(map, character):
         map[y][x] = "🧙"
 
     látás = character["vision"]
-    #for i in range(map[(y-látás):(y+látás)]):
-       # for j in range(map[(x-látás):(x+látás)]):
-         #   print(map[i][j])
-          #  if map[i][j] != "🧙":
-             #   print(map[i][j])
-     #   print('')
-    if y <= látás and x <= látás:
-        for i in range(len(map[0:y+látás+1])):
-            for j in range(len(map[0:x+látás+1])):
-                print(map[i][j],end='')
-                if map[i][j] != "🧙":
-                    print(map[i][j],end='')
+
+    for i in range(len(map)):
+        if y-i <= látás and i-y <= látás:
+            for j  in range(len(map[i])):
+                if x-j <= látás and j-x <= látás:
+                    if map[i][j] != "🧙":
+                        print(map[i][j],end='')
+                        print(map[i][j],end='')
+                    else:
+                        print("🧙",end='')
             print('')
-    if y > látás and x > látás:
-        for i in range(map[y-látás:y+látás]):
-            for j in range(map[x-látás:x+látás]):
-                print(map[i][j],end='')
-                if map[i][j] != "🧙":
-                    print(map[i][j],end='')
-        print('')
-    if y > látás and x <= látás:
-        for i in range(map[y-látás:y+látás]):
-            for j in range(map[0:x+látás+1]):
-                print(map[i][j],end='')
-                if map[i][j] != "🧙":
-                    print(map[i][j],end='')
-        print('')
-    if y <= látás and x > látás:
-        for i in range(map[0:y+látás+1]):
-            for j in range(map[x-látás:x+látás]):
-                print(map[i][j],end='')
-                if map[i][j] != "🧙":
-                    print(map[i][j],end='')
-        print('')
 
 def move(map,character,direction):
     x = character["position"]["x"]
