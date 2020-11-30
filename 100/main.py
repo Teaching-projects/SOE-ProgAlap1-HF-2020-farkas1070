@@ -21,14 +21,11 @@ A feladatban tobb, esetenkent egymasra epulo fuggvenyt kell megirni, melyek erro
 # p1 es p2 is (x,y) tuple-ok
 def position_distance(p1,p2):
     import math
-
     p1x = p1[0]
     p1y = p1[1]
     p2x = p2[0]
     p2y = p2[1]
-    távolság = 0
-    if p2x < p1x:
-        távolság = math.sqrt(((abs(p2x-p1x))**2) + ((abs(p2y-p1y))**2))
+    távolság = math.sqrt(((abs(p2x-p1x))**2) + ((abs(p2y-p1y))**2))
     return távolság
    
 # Ez a fuggveny egy gpx-et var, ami a fent leirt pontokbol allo lista.
@@ -36,7 +33,7 @@ def position_distance(p1,p2):
 # Nem kell foglalkozni 3d tavolsaggal, csak a "felulnezeti tavolsaggal".
 def total_distance(gpx):
     total_distance = 0
-    for i in range(len(gpx)):
+    for i in range(len(gpx)-1):
         distance = position_distance(gpx[i]["position"], gpx[i+1]["position"])
         total_distance += distance
     return total_distance
@@ -45,7 +42,7 @@ def total_distance(gpx):
 # Ez adja meg maasodpercben, milyen hosszan futottunk
 def total_time(gpx):
     összmásdopercek = 0
-    for i in range(len(gpx)):
+    for i in range(len(gpx)-1):
         eltérés = gpx[i+1]["timestamp"] - gpx[i]["timestamp"]
         összmásdopercek += eltérés
     return összmásdopercek
@@ -53,7 +50,7 @@ def total_time(gpx):
 # Alldogalasnak szamit, ha ket meresi pont kozott nem valtozik a pozicio
 def idle_time(gpx):
     standingsecs = 0
-    for i in range(len(gpx)):
+    for i in range(len(gpx)-1):
         if gpx[i+1]["position"] == gpx[i]["position"]:
             eltérés = gpx[i+1]["timestamp"] - gpx[i]["timestamp"]
             eltérés += standingsecs
@@ -61,7 +58,7 @@ def idle_time(gpx):
 
 # Ez a fuggveny adja vissza masodpercben, hogy mennyit mozogtunk
 def moving_time(gpx):
-    mozgási_idő = None
+    mozgási_idő = 0
     összidő = total_time(gpx)
     nemmozgóidő = idle_time(gpx)
     mozgási_idő = összidő - nemmozgóidő
@@ -80,8 +77,8 @@ def pretty_time(seconds):
         minutes1 = idő[0]
         minutes2 = idő[1]
         allminutes = idő[0:2]
-        seconds1 = idő[0]
-        seconds2 = idő[1]
+        seconds1 = idő[2]
+        seconds2 = idő[3]
         allseconds = idő[3:5]
         if miutes1 == 0 or seconds1 == 0:
             if minutes1 == 0 and seconds1 != 0:
@@ -121,7 +118,7 @@ def pretty_time(seconds):
 # Ez a fuggveny szamolja ki, hogy mennyi volt az osszes emelkedes, azaz hany metert mentunk felfele
 def total_ascent(gpx):
     összesemelkedés = 0
-    for i in range(len(gpx)):
+    for i in range(len(gpx)-1):
         távolság = position_distance(gpx[i]["position"], gpx[i+1]["position"])
         if gpx[i]["elevation"] > 0:
             távolság += összesemelkedés
@@ -133,10 +130,11 @@ def total_ascent(gpx):
 def chop_after_distance(gpx, distance):
     track = []
     össztáv = 0
-    for i in range(len(gpx)):
+    for i in range(len(gpx)-1):
         if össztáv > distance:
             return track
         else:
+            track.append(gpx[i])
             össztáv += position_distance(gpx[i]["position"], gpx[i+1]["position"])
     if len(track) == 0:
         return track
