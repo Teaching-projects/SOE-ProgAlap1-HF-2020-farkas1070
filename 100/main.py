@@ -80,17 +80,17 @@ def pretty_time(seconds):
         seconds1 = idő[2]
         seconds2 = idő[3]
         allseconds = idő[3:5]
-        if miutes1 == 0 or seconds1 == 0:
-            if minutes1 == 0 and seconds1 != 0:
+        if miutes1 == "0" or seconds1 == "0":
+            if minutes1 == "0" and seconds1 != "0":
                 string = "{}:{}".format(minutes2,allseconds)
                 return string
-            if minutes1 !=0 and seconds1 == 0:
+            if minutes1 !="0" and seconds1 == "0":
                 string = "{}:{}".format(allminutes,seconds2)
                 return string
-            if minutes1 == 0 and seconds1 == 0:
+            if minutes1 == "0" and seconds1 == "0":
                 string = "{}:{}".format(minutes2,seconds2)
                 return string
-        elif minutes1 != 0 and seconds1 != 0:
+        elif minutes1 != "0" and seconds1 != "0":
             string = "{}:{}".format(allminutes,allseconds)
             return string
     if len(idő) == 6:
@@ -101,17 +101,17 @@ def pretty_time(seconds):
         seconds1 = idő[4]
         seconds2 = idő[5]
         allseconds = idő[4:6]
-        if hours1 == 0 or seconds1 == 0:
-            if hours1 == 0 and seconds1 != 0:
+        if hours1 == "0" or seconds1 == "0":
+            if hours1 == "0" and seconds1 != "0":
                 string = "{}:{}:{}".format(hours1,allminutes,allseconds)
                 return string
-            if hours1 !=0 and seconds1 == 0:
+            if hours1 !="0" and seconds1 == "0":
                 string = "{}:{}:{}".format(allhours,allminutes,seconds2)
                 return string
-            if hours1 == 0 and seconds1 == 0:
+            if hours1 == "0" and seconds1 == "0":
                 string = "{}:{}:{}".format(hours2,allminutes,seconds2)
                 return string
-        elif hours1 != 0 and seconds1 != 0:
+        elif hours1 != "0" and seconds1 != "0":
             string = "{}:{}:{}".format(allhours,allminutes,allseconds)
             return string
 
@@ -141,14 +141,34 @@ def chop_after_distance(gpx, distance):
 
 # Ez a fuggveny keresse meg a leggyorsabb, legalabb 1 km-es szakaszt a trackben, es adjon vissza rola egy masolatot
 def fastest_1k(gpx):
-    minimum = 100000000000
-    for i in range(len(gpx)):
-        lista = chop_after_distance(gpx,1000)
-        if lista[-1]["timestamp"] < minimum:
-            minimum = lista[-1]["timestamp"]
-        else:
-            lista = chop_after_distance(gpx,1000)
-    return lista
+    lista = gpx
+    kilométeresek = []
+    while True:
+        szakasz = chop_after_distance(lista,1000)
+        del lista[0:len(szakasz)]
+        if len(szakasz) != 0:
+            kilométeresek.append(szakasz)
+    
+    difference = 0
+    differences = []
+
+    for i in range(len(kilométeresek)):
+        for j in range(len(kilométeresek[i])-1):
+            if j == 0:
+                difference = kilométeresek[i][j]["timestamp"][-1]
+                differences.append(difference)
+            else:
+                difference = kilométeresek[i][j-(j+1)]["timestamp"] - kilométeresek[i+1][j-(j+1)]["timestamp"]
+                differences.append(difference)
+            
+    legrövidebb = min(differences)
+    for i in range(len(differences)):
+        if differences[i] == legrövidebb:
+            helyiérték = i
+    
+    for i in range(len(kilométeresek)):
+        if i == helyiérték:
+            return kilométeresek[i]
 
 # Az alabbi reszek betoltenek egy ilyen pickle fajlt, es kiirjak a statisztikakat megformazva
 import pickle
@@ -163,4 +183,3 @@ print(" - Total time    : {}".format(pretty_time(total_time(gpx))))
 print(" - Total time    : {}".format(pretty_time(moving_time(gpx))))
 print(" - Total ascent  : {:.0f} m".format(total_ascent(gpx)))
 print(" - Fastest 1k    : {}".format(pretty_time(total_time(fastest_1k(gpx)))))
-
