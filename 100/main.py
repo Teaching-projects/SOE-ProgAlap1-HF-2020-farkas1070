@@ -98,7 +98,7 @@ def total_ascent(gpx):
     összesemelkedés = 0
     for i in range(len(gpx)-1):
         távolság = position_distance(gpx[i]["position"], gpx[i+1]["position"])
-        if gpx[i+1]["elevation"] > gpx[i]["elevation"]:
+        if gpx[i+1]["elavation"] > gpx[i]["elavation"]:
             összemelkedés += távolság
     return összesemelkedés
 
