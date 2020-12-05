@@ -71,49 +71,27 @@ def moving_time(gpx):
 # Jo peldak: 3:14, 12:23:05, 1:00:01
 # Rossz peldak: 03:14, 12:23:5, 1:0:1
 def pretty_time(seconds):
-    idő = seconds
-    idő = str(idő)
-    if len(idő) == 4:
-        minutes1 = idő[0]
-        minutes2 = idő[1]
-        allminutes = idő[0:2]
-        seconds1 = idő[2]
-        seconds2 = idő[3]
-        allseconds = idő[3:5]
-        if miutes1 == "0" or seconds1 == "0":
-            if minutes1 == "0" and seconds1 != "0":
-                string = "{}:{}".format(minutes2,allseconds)
-                return string
-            if minutes1 !="0" and seconds1 == "0":
-                string = "{}:{}".format(allminutes,seconds2)
-                return string
-            if minutes1 == "0" and seconds1 == "0":
-                string = "{}:{}".format(minutes2,seconds2)
-                return string
-        elif minutes1 != "0" and seconds1 != "0":
-            string = "{}:{}".format(allminutes,allseconds)
-            return string
-    if len(idő) == 6:
-        hours1 = idő[0]
-        hours2 = idő[1]
-        allhours = idő[0:2]
-        allminutes = idő[2:4]
-        seconds1 = idő[4]
-        seconds2 = idő[5]
-        allseconds = idő[4:6]
-        if hours1 == "0" or seconds1 == "0":
-            if hours1 == "0" and seconds1 != "0":
-                string = "{}:{}:{}".format(hours1,allminutes,allseconds)
-                return string
-            if hours1 !="0" and seconds1 == "0":
-                string = "{}:{}:{}".format(allhours,allminutes,seconds2)
-                return string
-            if hours1 == "0" and seconds1 == "0":
-                string = "{}:{}:{}".format(hours2,allminutes,seconds2)
-                return string
-        elif hours1 != "0" and seconds1 != "0":
-            string = "{}:{}:{}".format(allhours,allminutes,allseconds)
-            return string
+    hours = seconds // (60*60)
+    maradék1 = seconds - (hours*60*60)
+    minutes = maradék1 // 60
+    maradék2 = maradék1 - (minutes * 60)
+    secs = maradék2
+    if hours < 0:
+        minutes = str(minutes)
+        secs = str(secs)
+        if len(minutes) != 2:
+            minutes = "0{}".format(minutes)
+        time = "{}:{}".format(minutes, secs)
+        return time
+
+    else:
+        hours = str(hours)
+        minutes = str(minutes)
+        secs = str(secs)
+        if len(minutes) != 2:
+            minutes = "0{}".format(minutes)
+        time = "{}:{}:{}".format(hours,minutes,secs)
+        return time
 
 # Ez a fuggveny szamolja ki, hogy mennyi volt az osszes emelkedes, azaz hany metert mentunk felfele
 def total_ascent(gpx):
