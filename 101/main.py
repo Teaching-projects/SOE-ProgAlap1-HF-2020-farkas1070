@@ -42,19 +42,14 @@ def megjelenites(szo:str, betuk:Tippek) -> str:
         str: a megjelenített változata a szónak
     """
     word = ""
-    for i in szo:
-        betu = False
-        specialis = False
-        if kozte_van(i, betuk): betu = True
-        if kozte_van(i, specialis_karakterek):
-            specialis = True
-        if betu or specialis:
-            word += i
-        else:
-            word += "_"
-
-    return word
     
+    for i in szo:
+        joe = False
+        speciális = False
+        if kozte_van(i, betuk): joe = True
+        if kozte_van(i, specialis_karakterek): speciális = True
+        if joe or speciális: word += i
+        else: word += "_"
     return word
 
 def megfejtett(szo:str, betuk:Tippek) -> bool:
@@ -122,8 +117,8 @@ def rossz_tippek(szo:str, betuk:Tippek) -> int:
         rossz = True
         for j in szo:
             if j == i:
-                rossze = False
-        if rossze:
+                rossz = False
+        if rossz:
             rosszak += 1
     return rosszak 
 
@@ -140,8 +135,9 @@ def eletek(osszes:int,elhasznalt:int)->str:
     Returns:
         str: 😄😄😄💀💀 formátumú indikátor (a példa adatai: 5 összes, 2 elhasznált)
     """
+    
     osszeselet = osszes
-    elhasznalt = rossz_tippek(szo,Tippek)
+    elhasznalt = rossz_tippek(szo,tippek)
     eletek = ""
 
     for i in range(len(osszeselet-elhasznalt)):
@@ -176,7 +172,7 @@ def akasztofa(szo:str,osszes_elet:int) -> None:
     megmaradt_eletek = osszes_elet
     
     tippek = []
-    
+
     win = False
     
     while megmaradt_eletek > 0:
