@@ -17,7 +17,7 @@ def kozte_van(betu:str, betuk:Tippek) -> bool:
     hamis = 1
     for i in range(len(betuk)):
         if betuk[i] == betu:
-            return true
+            return True
         else:
             hamis += 1
         
@@ -110,7 +110,7 @@ def rossz_tippek(szo:str, betuk:Tippek) -> int:
         szobetui.append(szo[i])
     
     for i in range(len(Tippek)):
-        if tippek[i] not in szobetui:
+        if Tippek[i] not in szobetui:
             rossz_tippek += 1
     
     return rossz_tippek
@@ -129,7 +129,7 @@ def eletek(osszes:int,elhasznalt:int)->str:
         str: 😄😄😄💀💀 formátumú indikátor (a példa adatai: 5 összes, 2 elhasznált)
     """
     osszeselet = osszes
-    elhasznalt = rossz_tippek(szo,betuk)
+    elhasznalt = rossz_tippek(szo,Tippek)
     eletek = ""
 
     for i in range(len(osszeselet-elhasznalt)):
@@ -163,19 +163,19 @@ def akasztofa(szo:str,osszes_elet:int) -> None:
     megmaradt_életek = osszes_elet
     rosszak = rossz_tippek(szo,Tippek)
 
-    while (rossz_tippek != osszes_elet) or (megfejtett(szo, Tippek) == False):
-        print(megjelenites(szo, betuk))
-        print(eletek(osszes,elhasznalt))
-        print(Tippek)
-        print("Adja meg a kovetkezo betut: ")
-        megmaradt_életek -= 1
+    while (rosszak != osszes_elet) or (megfejtett(szo, Tippek) == False):
+      print(megjelenites(szo, Tippek))
+      print(eletek(maxelet,rosszak))
+      print(Tippek)
+      print("Adja meg a kovetkezo betut: ")
+      megmaradt_életek -= 1
 
     if megfejtett(szo, Tippek) == True:
-        print(megfejtett(szo, Tippek))
-        print("Gratulalok, nyertel, es meg {} eleted maradt!".format(megmaradt_életek))
+      print(megfejtett(szo, Tippek))
+      print("Gratulalok, nyertel, es meg {} eleted maradt!".format(megmaradt_életek))
     
     if rossz_tippek == osszes_elet:
-        print("Sajnalom, nem nyertel, ez lett volna a megoldas: {}".format(szo))
+      print("Sajnalom, nem nyertel, ez lett volna a megoldas: {}".format(szo))
 
     
 
