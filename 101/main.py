@@ -41,13 +41,13 @@ def megjelenites(szo:str, betuk:Tippek) -> str:
 
     word = ""
     for i in range(len(szo)):
-        if szo[i] in betuk and szo[i] == betuk[i]:
+        if szo[i] in betuk:
             word = word + szo[i]
-        elif szo[i] in betuk and szo[i] != betuk[i]:
+        elif szo[i] not in betuk:
             word = word + "_"
         elif szo[i] in specialis_karakterek:
             for j in specialis_karakterek:
-                if j == szo[i]:
+                if specialis_karakterek[j] == szo[i]:
                     word +=  specialis_karakterek[j]
     
     return word
