@@ -106,11 +106,12 @@ def rossz_tippek(szo:str, betuk:Tippek) -> int:
     """
     rossz_tippek = 0
     szobetui = []
+
     for i in range(len(szo)):
         szobetui.append(szo[i])
-    
-    for i in range(len(Tippek)):
-        if Tippek[i] not in szobetui:
+
+    for i in range(len(betuk)):
+        if betuk[i] not in szobetui:
             rossz_tippek += 1
     
     return rossz_tippek
@@ -161,21 +162,28 @@ def akasztofa(szo:str,osszes_elet:int) -> None:
         osszes_elet (int): az életeink száma, azaz hány rossz tipp után vesztettünk
     """
     megmaradt_életek = osszes_elet
-    rosszak = rossz_tippek(szo,Tippek)
-
-    while (rosszak != osszes_elet) or (megfejtett(szo, Tippek) == False):
-      print(megjelenites(szo, Tippek))
-      print(eletek(maxelet,rosszak))
-      print(Tippek)
-      print("Adja meg a kovetkezo betut: ")
-      megmaradt_életek -= 1
+    index = 0
+    if index > 0:
+        rosszak = rossz_tippek(szo,Tippek)
+    else:
+        rosszak = 0
+    
+    while (rosszak != osszes_elet) or (megfejtett(szo, Tippek) == False) or index == 0:
+        print(megjelenites(szo, Tippek))
+        print(eletek(maxelet,rosszak))
+        print(Tippek)
+        betu = input("Adja meg a kovetkezo betut: ")
+        Tippek.append(betű)
+    
+        megmaradt_életek -= 1
+        index += 1
 
     if megfejtett(szo, Tippek) == True:
-      print(megfejtett(szo, Tippek))
-      print("Gratulalok, nyertel, es meg {} eleted maradt!".format(megmaradt_életek))
+        print(megfejtett(szo, Tippek))
+        print("Gratulalok, nyertel, es meg {} eleted maradt!".format(megmaradt_életek))
     
     if rossz_tippek == osszes_elet:
-      print("Sajnalom, nem nyertel, ez lett volna a megoldas: {}".format(szo))
+        print("Sajnalom, nem nyertel, ez lett volna a megoldas: {}".format(szo))
 
     
 
