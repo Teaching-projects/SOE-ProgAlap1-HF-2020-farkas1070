@@ -13,7 +13,15 @@ def kozte_van(betu:str, betuk:Tippek) -> bool:
     Returns:
         bool: `True` ha benne van, `False` ha nincsen.
     """
-    pass
+    hamis = 0
+    for i in range(len(betuk)):
+        if betuk[i] == betu:
+            return true
+        else:
+            hamis += 1
+        
+        if hamis == len(betuk):
+            return False
 
 specialis_karakterek=[' ','.',',','!','?',':','-']
 
@@ -29,7 +37,19 @@ def megjelenites(szo:str, betuk:Tippek) -> str:
     Returns:
         str: a megjelenített változata a szónak
     """
-    pass
+
+    word = ""
+    for i in range(len(szo)):
+        if szo[i] in betuk and szo[i] == betuk[i]:
+            word = word + szo[i]
+        elif szo[i] in betuk and szo[i] != betuk[i]:
+            word = word + "_"
+        elif szo[i] in specialis_karakterek:
+            for j in specialis_karakterek:
+                if j == szo[i]:
+                    word +=  specialis_karakterek[j]
+    
+    return word
 
 def megfejtett(szo:str, betuk:Tippek) -> bool:
     """Megadja, hogy sikerült-e már megfejtenünk a szót, azaz minden benne levő betű már a tippjeink között van.
@@ -41,7 +61,16 @@ def megfejtett(szo:str, betuk:Tippek) -> bool:
     Returns:
         bool: `True` ha teljesen megfejtettük a szót, `False` különben
     """
-    pass
+    jo_tippek = 0
+    for i in range(len(szo)):
+        if szo[i] in betuk:
+            jo_tippek += 1
+    
+    if jo_tippek == len(szo):
+        return True
+    else:
+        return False
+
 
 def tartalmazza(szo:str, betu:str) -> bool:
     """Megadja, hogy a megaadott betű szerepel-e a megadott szóban.
@@ -51,9 +80,18 @@ def tartalmazza(szo:str, betu:str) -> bool:
         betu (str): a betű, amit keresünk, feltételezhető, hogy 1 karakter hosszú
 
     Returns:
-        bool: `True` ha szerepel, `False` ha nem    
+        bool: `True` ha szerepel, `False` ha nem
     """
-    pass
+    betuk = []
+    for i in range(len(szo)):
+        betuk.append(szo[i])
+    
+    if betu in betuk:
+        return True
+    else:
+        return False
+    
+
 
 def rossz_tippek(szo:str, betuk:Tippek) -> int:
     """Megadja, hogy hány rossz betűt tippeltünk eddig.
@@ -65,7 +103,17 @@ def rossz_tippek(szo:str, betuk:Tippek) -> int:
     Returns:
         int: a rossz tippek száma
     """
-    pass
+    rossz_tippek = 0
+    szobetui = []
+    for i in range(len(szo)):
+        szobetui.append(szo[i])
+    
+    for i in range(len(Tippek)):
+        if tippek[i] not in szobetui:
+            rossz_tippek += 1
+    
+    return rossz_tippek
+
 
 def eletek(osszes:int,elhasznalt:int)->str:
     """Visszaad egy olyan szöveget, ami egy indikátor arra, hány életünk van még.
@@ -79,7 +127,17 @@ def eletek(osszes:int,elhasznalt:int)->str:
     Returns:
         str: 😄😄😄💀💀 formátumú indikátor (a példa adatai: 5 összes, 2 elhasznált)
     """
-    pass
+    osszeselet = osszes
+    elhasznalt = rossz_tippek(szo,betuk)
+    eletek = ""
+
+    for i in range(len(osszeselet-elhasznalt)):
+        eletek = eletek + "😄"
+    
+    for i in range(len(elhasznalt)):
+        eletek = eletek + "💀"
+    
+    return eletek
 
 def akasztofa(szo:str,osszes_elet:int) -> None:
     """Végigvisz egy akasztófa játékot, ahol a megadott szót kell kitalálni, és `osszes_elet` rossz tipp után vesztettünk.
@@ -101,7 +159,22 @@ def akasztofa(szo:str,osszes_elet:int) -> None:
         szo (str): a megfejtendő szó
         osszes_elet (int): az életeink száma, azaz hány rossz tipp után vesztettünk
     """
-    pass
+    megmaradt_életek = osszes_elet
+
+    while rossz_tippek != osszes_elet or megfejtett(szo, Tippek):
+        print(megjelenites(szo, betuk))
+        print(eletek(osszes,elhasznalt))
+        print(Tippek)
+        print("Adja meg a kovetkezo betut: ")
+        megmaradt_életek -= 1
+
+    if megfejtett(szo, Tippek):
+        print(megfejtett(szo, Tippek))
+        print("Gratulalok, nyertel, es meg {} eleted maradt!".format(megmaradt_életek))
+    
+    if rossz_tippek == osszes_elet:
+        print("Sajnalom, nem nyertel, ez lett volna a megoldas: {}".format(szo))
+
     
 
 
