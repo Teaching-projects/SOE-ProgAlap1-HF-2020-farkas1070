@@ -13,7 +13,8 @@ def kozte_van(betu:str, betuk:Tippek) -> bool:
     Returns:
         bool: `True` ha benne van, `False` ha nincsen.
     """
-    hamis = 0
+
+    hamis = 1
     for i in range(len(betuk)):
         if betuk[i] == betu:
             return true
@@ -160,15 +161,16 @@ def akasztofa(szo:str,osszes_elet:int) -> None:
         osszes_elet (int): az életeink száma, azaz hány rossz tipp után vesztettünk
     """
     megmaradt_életek = osszes_elet
+    rosszak = rossz_tippek(szo,Tippek)
 
-    while rossz_tippek != osszes_elet or megfejtett(szo, Tippek):
+    while (rossz_tippek != osszes_elet) or (megfejtett(szo, Tippek) == False):
         print(megjelenites(szo, betuk))
         print(eletek(osszes,elhasznalt))
         print(Tippek)
         print("Adja meg a kovetkezo betut: ")
         megmaradt_életek -= 1
 
-    if megfejtett(szo, Tippek):
+    if megfejtett(szo, Tippek) == True:
         print(megfejtett(szo, Tippek))
         print("Gratulalok, nyertel, es meg {} eleted maradt!".format(megmaradt_életek))
     
