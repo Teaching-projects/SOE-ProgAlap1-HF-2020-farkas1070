@@ -17,13 +17,11 @@ def kozte_van(betu:str, betuk:Tippek) -> bool:
     for i in betuk:
         if i == betu:
             return True
-        return False
+    return False
     
-    #print(kozte_van("a",["a","b","c"]))
-    #print(kozte_van("b",["a","b","c"]))
-    #print(kozte_van("c",["a","b","c"]))
-    #print(kozte_van("d",["a","b","c"]))
-    #print("should be True,True,True,False")
+
+#print(kozte_van("b",["a","b","c"]))
+#print("should be True,True,True,False")
 
 
 
@@ -41,16 +39,13 @@ def megjelenites(szo:str, betuk:Tippek) -> str:
     Returns:
         str: a megjelenített változata a szónak
     """
-    word = ""
-    
-    for i in szo:
-        joe = False
-        speciális = False
-        if kozte_van(i, betuk): joe = True
-        if kozte_van(i, specialis_karakterek): speciális = True
-        if joe or speciális: word += i
-        else: word += "_"
-    return word
+    lista = list(szo)
+    valami = ""
+
+    for i in lista:
+        if kozte_van(i,betuk+specialis_karakterek): valami += i
+        else: valami += "_"
+    return valami
 
 def megfejtett(szo:str, betuk:Tippek) -> bool:
     """Megadja, hogy sikerült-e már megfejtenünk a szót, azaz minden benne levő betű már a tippjeink között van.
@@ -63,15 +58,9 @@ def megfejtett(szo:str, betuk:Tippek) -> bool:
         bool: `True` ha teljesen megfejtettük a szót, `False` különben
     """
     jo_tippek = 0
-    for i in range(len(szo)):
-        if szo[i] in betuk:
-            jo_tippek += 1
-    
-    if jo_tippek == len(szo):
-        return True
-    else:
-        return False
-
+    if megjelenites(szo,betuk) == szo: return True
+    else: return False
+#print(megfejtett("caca bab",["a","c","b"]))
 
 def tartalmazza(szo:str, betu:str) -> bool:
     """Megadja, hogy a megaadott betű szerepel-e a megadott szóban.
@@ -83,14 +72,9 @@ def tartalmazza(szo:str, betu:str) -> bool:
     Returns:
         bool: `True` ha szerepel, `False` ha nem
     """
-    betuk = []
-    for i in range(len(szo)):
-        betuk.append(szo[i])
-    
-    if betu in betuk:
-        return True
-    else:
-        return False
+    for i in szo:
+        if i == betu: return True
+    else: return False
     
 
 
@@ -104,23 +88,12 @@ def rossz_tippek(szo:str, betuk:Tippek) -> int:
     Returns:
         int: a rossz tippek száma
     """
-    rosszak = 0
-    for i in szo:
-        rossz = True
-        for j in betuk:
-            if j == i:
-                rossz = False
-        if rossz:
-            rosszak += 1
 
+    rossz = 0
     for i in betuk:
-        rossz = True
-        for j in szo:
-            if j == i:
-                rossz = False
-        if rossz:
-            rosszak += 1
-    return rosszak 
+        if i not in szo:
+            rossz += 1
+    return rossz
 
 
 def eletek(osszes:int,elhasznalt:int)->str:
@@ -135,18 +108,11 @@ def eletek(osszes:int,elhasznalt:int)->str:
     Returns:
         str: 😄😄😄💀💀 formátumú indikátor (a példa adatai: 5 összes, 2 elhasznált)
     """
-    
-    osszeselet = osszes
-    elhasznalt = rossz_tippek(szo,tippek)
-    eletek = ""
 
-    for i in range(len(osszeselet-elhasznalt)):
-        eletek = eletek + "😄"
-    
-    for i in range(len(elhasznalt)):
-        eletek = eletek + "💀"
-    
-    return eletek
+    elet = (osszes - elhasznalt) * "😄"
+    halal = elhasznalt * "💀"
+    maradt = elet + halal
+    return maradt
 
 def akasztofa(szo:str,osszes_elet:int) -> None:
     """Végigvisz egy akasztófa játékot, ahol a megadott szót kell kitalálni, és `osszes_elet` rossz tipp után vesztettünk.
@@ -169,37 +135,24 @@ def akasztofa(szo:str,osszes_elet:int) -> None:
         osszes_elet (int): az életeink száma, azaz hány rossz tipp után vesztettünk
     """
 
-    megmaradt_eletek = osszes_elet
-    
-    tippek = []
-
-    win = False
-    
-    while megmaradt_eletek > 0:
-        rosszak = rossz_tippek(szo, tippek)
-        print(megjelenites(szo, tippek))
-        print(eletek(osszes_elet,rosszak))
-        print(tippek)
+    betuk = []
+    jatek = maxelet
+    while True:
+        print(megjelenites(szo,betuk))
+        print(eletek(maxelet, rossz_tippek(szo,betuk)))
+        print(betuk)
         betu = input("Adja meg a kovetkezo betut: ")
         print(betu)
-        tippek.append(betu)
-        if megfejtett(szo, tippek):
-            win = True
+        betuk.append(betu)
+        if megfejtett(szo,betuk):
+            print(szo)
+            print("Gratulalok, nyertel, es meg {} eleted maradt!".format(maxelet - rossz_tippek(szo, betuk)))
             break
-        
         if tartalmazza(szo, betu) == False:
-            kor -= 1
-        if tartalmazza(szo, betu) == False:
-            kor -= 1
-        megmaradt_életek -= 1
-        
-
-    if win == True: 
-        print(szo)
-        print("Gratulalok, nyertel, es meg {} eleted maradt!".format(kor))
-    else:
-        print("Sajnalom, nem nyertel, ez lett volna a megoldas: {}".format(szo))
-
+            jatek -= 1
+        if jatek ==  0:
+            print("Sajnalom, nem nyertel, ez lett volna a megoldas: {}".format(szo))
+            break
     
 
 
