@@ -70,27 +70,18 @@ def moving_time(gpx):
 # Jo peldak: 3:14, 12:23:05, 1:00:01
 # Rossz peldak: 03:14, 12:23:5, 1:0:1
 def pretty_time(seconds):
-    hours = seconds // (60*60)
-    maradék1 = seconds - (hours*60*60)
-    minutes = maradék1 // 60
-    maradék2 = maradék1 - (minutes * 60)
-    secs = maradék2
-    if hours < 0:
-        minutes = str(minutes)
-        secs = str(secs)
-        if len(minutes) != 2:
-            minutes = "0{}".format(minutes)
-        time = "{}:{}".format(minutes, secs)
-        return time
-
+    prettytime = 0
+    h = seconds // 3600
+    m = (seconds % 3600) // 60
+    s = ((seconds % 3600) % 60) % 60
+    if h < 1:
+        if m == 0:
+            prettytime = "{:02d}:{:02d}".format(m, s)
+        else:
+            prettytime = "{}:{:02d}".format(m, s)
     else:
-        hours = str(hours)
-        minutes = str(minutes)
-        secs = str(secs)
-        if len(minutes) != 2:
-            minutes = "0{}".format(minutes)
-        time = "{}:{}:{}".format(hours,minutes,secs)
-        return time
+        prettytime = "{}:{:02d}:{:02d}".format(h, m, s)
+    return prettytime
 
 # Ez a fuggveny szamolja ki, hogy mennyi volt az osszes emelkedes, azaz hany metert mentunk felfele
 def total_ascent(gpx):
