@@ -37,12 +37,8 @@ class Time:
         >>> Time(1234)._ss()
         34
         """
-        seconds = self.to_seconds(self)
-        if seconds <= 60:
-            return seconds
-        else:
-            return_value = seconds - (seconds // 60)
-            return return_value
+        seconds = self.to_seconds()
+        return seconds % 60
 
     
     def _mm(self) -> int:
@@ -58,7 +54,7 @@ class Time:
         >>> Time(1234)._mm()
         20
         """
-        seconds = self.to_seconds(self)
+        seconds = self.to_seconds()
         return seconds // 60
 
         
@@ -80,7 +76,7 @@ class Time:
         >>> Time(12345)._hh()
         3
         """
-        seconds = self.to_seconds(self)
+        seconds = self.to_seconds()
         return seconds // 3600
     
     def pretty_format(self) -> str:
@@ -105,21 +101,13 @@ class Time:
         """
 
 
-        seconds = self.to_seconds(self)
+        seconds = self.to_seconds()
         if seconds < 60:
-            return "{}".format(self._ss(self))
+            return "{}".format(self._ss())
         elif seconds >= 60 and seconds < 3600:
-            return "{}:{}".format(self._mm(self),self._ss(self))
+            return "{}:{}".format(self._mm(),self._ss())
         else:
-            return "{}:{}:{}".format(self._hh(self),self._mm(self),self._ss(self))
-
-        seconds = self._ss(self)
-        minutes = self._mm(self)
-        hours = self._hh(self)
-        string = "{}:{}:{}".format(hours,minutes,seconds)
-        return string
-
-
+            return "{}:{}:{}".format(self._hh(),self._mm(),self._ss())
 
     def set_from_string(self, time:str) -> int:
         """Beallitja az idot egy string alapjan, melynek a formatuma olyan mint a `pretty_format` eseteben.
