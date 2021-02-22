@@ -105,14 +105,25 @@ class Time:
             return "{}".format(self._ss())
         elif seconds >= 60 and seconds < 3600:
             minutes = self._mm()
-            seconds = seconds - (self._mm() * 60)
-            return "{}:{}".format(minutes,seconds)
+            self.seconds -= (minutes * 60)
+            seconds = str(self.seconds)
+            if minutes != 0 and len(seconds) == 1:
+                return "{}:{}{}".format(minutes,0,self.seconds)
+            else:
+                return "{}:{}".format(minutes,self.seconds)
         else:
             hours = self._hh()
             self.seconds -= hours * 3600
             minutes = self._mm()
             self.seconds -= minutes * 60
-            return "{}:{}:{}".format(hours,minutes,self.seconds)
+            hours = str(hours)
+            minutes = str(minutes)
+            seconds = str(self.seconds)
+            if len(minutes) == 1:
+                minutes = "{}{}".format(0,minutes)
+            if len(seconds) == 1:
+                seconds = "{}{}".format(0,seconds)
+            return "{}:{}:{}".format(hours,minutes,seconds)
 
     def set_from_string(self, time:str) -> int:
         """Beallitja az idot egy string alapjan, melynek a formatuma olyan mint a `pretty_format` eseteben.
