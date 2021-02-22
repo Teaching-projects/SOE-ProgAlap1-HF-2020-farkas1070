@@ -152,7 +152,7 @@ class Time:
         pos = 0
         for i in range(len(string)):
             if string[i] != ":":
-                temp_string += string[i]
+                string[i] += temp_string
             else:
                 temp_string = int(temp_string)
                 if pos == 0:
@@ -162,6 +162,7 @@ class Time:
                 else:
                     total_time += temp_string
                 temp_string = ""
+                pos += 1
         return total_time
 
                     
