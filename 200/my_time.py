@@ -146,7 +146,7 @@ class Time:
         399683
         """
 
-        string = self.pretty_format(self)
+        string = self.pretty_format()
         total_time = 0
         temp_string = ""
         pos = 0
