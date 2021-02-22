@@ -33,7 +33,6 @@ done;
 
 for py in `ls *.py`; do
     if [ "$py" != "main.py" ] && [ "$py" != "generate_input.py" ]; then
-        echo echo "--- Doctest of $py -------------------------">>$LOG
         python3 -m doctest $py >> $LOG || :
     fi
 done;
