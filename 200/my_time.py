@@ -8,7 +8,7 @@ class Time:
         Args:
             seconds (int): a masodpercek szama
         """
-        pass
+        self.seconds = seconds
         
     def to_seconds(self) -> int:
         """Adja vissza egy `int`-ben, hogy masodpercben kifejezve mennyi az ido
@@ -21,7 +21,8 @@ class Time:
         >>> Time(345).to_seconds()
         345
         """
-        pass
+        secs = self.seconds
+        return secs
 
     def _ss(self)->int:
         """Visszaadja, hogy mennyit mutat a "masodpercmutato"
@@ -36,7 +37,13 @@ class Time:
         >>> Time(1234)._ss()
         34
         """
-        pass
+        seconds = self.to_seconds(self)
+        if seconds <= 60:
+            return seconds
+        else:
+            return_value = seconds - (seconds // 60)
+            return return_value
+
     
     def _mm(self) -> int:
         """Visszaadja, hogy mennyit mutat a "percmutato"
@@ -51,7 +58,10 @@ class Time:
         >>> Time(1234)._mm()
         20
         """
-        pass
+        seconds = self.to_seconds(self)
+        return seconds // 60
+
+        
     
     def _hh(self) -> int:
         """Visszaadja, hogy mennyit mutat az "oramutato", amely sosem nullazodik.
@@ -70,7 +80,8 @@ class Time:
         >>> Time(12345)._hh()
         3
         """
-        pass
+        seconds = self.to_seconds(self)
+        return seconds // 3600
     
     def pretty_format(self) -> str:
         """Visszaadja az idot szep modon
@@ -92,7 +103,21 @@ class Time:
         >>> Time(123456).pretty_format()
         '34:17:36'
         """
-        pass
+
+
+        seconds = self.to_seconds(self)
+        if seconds < 60:
+            return "{}".format(self._ss(self))
+        elif seconds >= 60 and seconds < 3600:
+            return "{}:{}".format(self._mm(self),self._ss(self))
+        else:
+            return "{}:{}:{}".format(self._hh(self),self._mm(self),self._ss(self))
+
+        seconds = self._ss(self)
+        minutes = self._mm(self)
+        hours = self._hh(self)
+        string = "{}:{}:{}".format(hours,minutes,seconds)
+        return string
 
 
 
@@ -116,5 +141,33 @@ class Time:
         >>> Time().set_from_string('111:01:23')
         399683
         """
-        pass
+
+        string = self.pretty_format(self)
+        total_time = 0
+        temp_string = ""
+        pos = 0
+        for i in range(len(string)):
+            if string[i] != ":":
+                temp_string += string[i]
+            else:
+                temp_string = int(temp_string)
+                if pos == 0:
+                    total_time += temp_string *3600
+                elif pos == 1:
+                    total_time += temp_string * 60
+                else:
+                    total_time += temp_string
+                temp_string = ""
+        return total_time
+
+                    
+        
+            
+
+
+                
+                
+
+
+        
 
