@@ -100,14 +100,19 @@ class Time:
         '34:17:36'
         """
 
-
         seconds = self.to_seconds()
         if seconds < 60:
             return "{}".format(self._ss())
         elif seconds >= 60 and seconds < 3600:
-            return "{}:{}".format(self._mm(),self._ss())
+            minutes = self._mm()
+            seconds = seconds - (self._mm() * 60)
+            return "{}:{}".format(minutes,seconds)
         else:
-            return "{}:{}:{}".format(self._hh(),self._mm(),self._ss())
+            hours = self._hh()
+            self.seconds -= hours * 3600
+            minutes = self._mm()
+            self.seconds -= minutes * 60
+            return "{}:{}:{}".format(hours,minutes,self.seconds)
 
     def set_from_string(self, time:str) -> int:
         """Beallitja az idot egy string alapjan, melynek a formatuma olyan mint a `pretty_format` eseteben.
