@@ -146,17 +146,16 @@ class Time:
         399683
         """
 
-        string = self.pretty_format()
         total_time = 0
         pos = 0
-        string = string.split(":")
-        for i in range(len(string)):
+        time_list = time.split(":")
+        for i in range(len(time_list)):
             if pos == 0:
-                total_time += int(string[i]) * 3600
+                total_time += int(time_list[i]) * 3600
             elif pos == 1:
-                total_time += int(string[i]) * 60
+                total_time += int(time_list[i]) * 60
             else:
-                total_time += int(string[i])
+                total_time += int(time_list[i])
             pos += 1
         return total_time
 
