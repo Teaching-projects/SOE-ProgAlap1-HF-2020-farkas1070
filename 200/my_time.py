@@ -148,22 +148,18 @@ class Time:
 
         string = self.pretty_format()
         total_time = 0
-        temp_string = ""
         pos = 0
+        string = string.split(":")
         for i in range(len(string)):
-            if string[i] != ":":
-                temp_string += string[i]
+            if pos == 0:
+                total_time += int(string[i]) * 3600
+            elif pos == 1:
+                total_time += int(string[i]) * 60
             else:
-                temp_string = int(temp_string)
-                if pos == 0:
-                    total_time += temp_string *3600
-                elif pos == 1:
-                    total_time += temp_string * 60
-                else:
-                    total_time += temp_string
-                temp_string = ""
-                pos += 1
+                total_time += int(string[i])
+            pos += 1
         return total_time
+
 
                     
         
