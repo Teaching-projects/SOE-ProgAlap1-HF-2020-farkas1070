@@ -1,6 +1,7 @@
 #!/bin/bash
 
 LOG="log.txt"
+TMP="tmp.txt"
 DIR=$1
 
 cd $DIR
@@ -33,8 +34,11 @@ done;
 
 for py in `ls *.py`; do
     if [ "$py" != "main.py" ] && [ "$py" != "generate_input.py" ]; then
-        echo echo "--- Doctest of $py -------------------------">>$LOG
-        python3 -m doctest $py >> $LOG || :
+        if python3 -m doctest $py > $TMP; then
+            echo "Doctest for $py went well"
+        else
+            cat $TMP >> $LOG
+        fi        
     fi
 done;
 
