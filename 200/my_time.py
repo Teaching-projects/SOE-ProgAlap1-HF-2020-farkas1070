@@ -145,13 +145,13 @@ class Time:
         >>> Time().set_from_string('111:01:23')
         399683
         """
-        time_list = time.split(":")
-        if len(time_list) == 1:
-            return time_list[0]
-        elif len(time_list) == 2:
-            return (time_list[1] * 60) + time_list[2]
-        elif len(time_list) == 3:
-            return (time_list[2] * 3600) + (time_list[1] * 60) + time_list[0]
+        timelist = time.split(':') 
+        if len(timelist) == 1:
+            return int(timelist[0])
+        if len(timelist) == 2:
+            return int(timelist[0])*60 + int(timelist[1])
+        if len(timelist) == 3:
+            return int(timelist[0])*3600 + int(timelist[1]) * 60 + int(timelist[2])
 
 
 
