@@ -1,13 +1,13 @@
 function deploy {
     student=$1
     TMP="temporary_branch_for_remote_"
-    branchname="$TMP$remote"
+    branchname="$TMP$1"
     cowsay "Deploying new exercises to $student"
     git branch -d $branchname
     git checkout -b $branchname $student/main
     git pull --no-edit
     git merge --no-edit origin/main
-    git push $student HEAD:main
+    git push --force $student HEAD:main
     git checkout main
     git branch -d $branchname
 }
