@@ -86,7 +86,11 @@ class Graph:
             return False
     
     def add_vertex(self, vertex):
-        self.vertices.append(vertex)
+        if vertex in self.vertices:
+            return False
+        else:
+            self.vertices.append(vertex)
+            return True
     
     def add_edge(self,vertex1,vertex2):
         edge = (vertex1,vertex2)
@@ -115,14 +119,11 @@ class Graph:
         return False
 
     def d(self,vertex):
-        count_of_neighbors = 0
-        for i in range(len(self.edges)):
-            if vertex == self.edges[0] or vertex == self.edges[1]:
-                count_of_neighbors += 1
-        if count_of_neighbors == 0:
-            return None
-        else:
-            return count_of_neighbors
+        count = 0
+        for i in self.vertices:
+            if self.has_edge(i,vertex): count += 1
+        if vertex not in self.vertices: return None
+        else: return count
     
     def get_subgraph(self,vertices):
         subgraph = Graph([])

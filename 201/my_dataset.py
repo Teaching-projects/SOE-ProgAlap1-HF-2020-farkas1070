@@ -135,7 +135,7 @@ class DataSet:
 
     
     def probability(self,x) -> float:
-        return x / len(self.datalist)
+        return round(self.count(x) / len(self.data), 2)
     
     def range(self) -> tuple:
         min_value = self.min()
