@@ -76,23 +76,65 @@ B-C
 class Graph:
     
     def __init__(self, vertices=[]):
-        pass
-    
+        self.vertices = vertices
+        self.edges = []
+
     def has_vertex(self, vertex):
-        pass
+        if vertex in self.vertices:
+            return True
+        else:
+            return False
     
     def add_vertex(self, vertex):
-        pass
+        self.vertices.append(vertex)
     
     def add_edge(self,vertex1,vertex2):
-        pass
+        edge = (vertex1,vertex2)
+        reverse_edge = (vertex2,vertex1)
+        edge_list = self.edges
+        if len(edge_list) == 0:
+            self.edges.append(edge)
+            return True
+        for i in range(len(edge_list)):
+            if edge_list[i] == edge or edge_list[i] == reverse_edge:
+                return False
+            else:
+                self.edges.append(edge)
+                return True
+            
     
     def has_edge(self,vertex1,vertex2):
-        pass
+        if len(self.edges) == 0:
+            return False
+
+        edge = (vertex1,vertex2)
+        reverse_edge = (vertex2, vertex1)
+        for x in range(len(self.edges)):
+            if self.edges[x] == edge or self.edges[x] == reverse_edge:
+                return True
+        return False
 
     def d(self,vertex):
-        pass
+        count_of_neighbors = 0
+        for i in range(len(self.edges)):
+            if vertex == self.edges[0] or vertex == self.edges[1]:
+                count_of_neighbors += 1
+        if count_of_neighbors == 0:
+            return None
+        else:
+            return count_of_neighbors
     
     def get_subgraph(self,vertices):
-        pass
+        subgraph = Graph([])
+
+        for x in vertices:
+            subgraph.add_vertex(x)
+
+        for i in subgraph.vertices:
+            for j in subgraph.vertices:
+                if self.has_edge(i,j):
+                    subgraph.add_edge(i,j)
+        return subgraph
+    
+
     

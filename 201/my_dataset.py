@@ -111,30 +111,69 @@ Felev vegi jegyek
 class DataSet:
 
     def __init__(self, name) -> None:
-        pass
-    
+        self.name = name
+        self.datalist = []
+
     def record(self,data) -> None:
-        pass
+        self.datalist.append(data)
     
     def average(self) -> float:
-        pass
+        total_value = 0
+        for value in range(len(self.datalist)):
+            total_value += self.datalist[value]
+        return total_value / len(self.datalist)
 
     def min(self) -> int:
-        pass
+        return min(self.datalist)
+
 
     def max(self) -> int:
-        pass
+        return max(self.datalist)
     
     def count(self,x) -> int:
-        pass
+        return self.datalist.count(x)
+
     
     def probability(self,x) -> float:
-        pass
+        return x / len(self.datalist)
     
     def range(self) -> tuple:
-        pass
+        min_value = self.min()
+        max_value = self.max()
+        return (min_value, max_value)
 
     def print_histogram(self) -> None:
-        pass
+        print(self.name)
+        for character in range(len(self.name)):
+            if character != len(self.name) - 1:
+                print("-", end= "")
+            else:
+                print("-")
+        intervaal = self.range()
+        intervaal = list(intervaal)
+        for i in range(intervaal[1] + 1):
+            if i > intervaal[0] and i not in intervaal:
+                intervaal.append(i)
+        intervaal.sort()
+        for i in range(len(intervaal)):
+            amount = self.datalist.count(intervaal[i])
+            for x in range(8):
+                if x < 4:
+                    print(" ",end= "")
+                elif x == 4:
+                    print(intervaal[i], end= "")
+                elif x == 5 or x == 7:
+                    print(" ",end= "")
+                elif x == 6:
+                    print("|",end= "")
+            for n in range(amount):
+                if n != amount:
+                    print("#",end= "")
+                else:
+                    print("#")
+            print("")
+                
+            
+            
 
 
